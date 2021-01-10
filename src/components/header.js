@@ -5,9 +5,9 @@ export default function Header(props) {
   return (
     <div>
       <h1>{props.headerText}</h1>
-      <Link to="/">Home</Link>
+      {/* <Link to="/">Home</Link>
       <Link to="/about/">About</Link>
-      <Link to="/contact/">Contact</Link>
+      <Link to="/contact/">Contact</Link> */}
     </div>
   )
 }

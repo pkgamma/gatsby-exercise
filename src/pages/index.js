@@ -1,16 +1,47 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 import Header from "../components/header"
 import Layout from "../components/layout"
 
-export default function Home() {
+export default function Home({data}) {
+  // console.log(data)
   return (
     <Layout>
       <div>
-        <Header headerText="Homepage" />
+        <Header headerText="Home" />
         <p>This is my first Gatsby site!</p>
-        <img src="https://source.unsplash.com/random/400x200" alt="" />
+        <h2>Some posts:</h2>
+        <table>
+          <tbody>
+            {data.allMarkdownRemark.edges.map(({ node }) => (
+              <tr key={node.id}>
+                <td>{node.frontmatter.title}</td>
+                <td>{node.frontmatter.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </Layout>
   )
 }
+
+export const query = graphql`
+  query{
+    allMarkdownRemark {
+      edges {
+        node {
+          id
+          excerpt
+          frontmatter {
+            date
+            title
+          }
+        }
+      }
+      totalCount
+    }
+  }
+  
+  
+`
