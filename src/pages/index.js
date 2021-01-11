@@ -28,7 +28,7 @@ export default function Home({data}) {
 
 export const query = graphql`
   query{
-    allMarkdownRemark {
+    allMarkdownRemark(sort: {fields: frontmatter___date, order: ASC}) {
       edges {
         node {
           id
@@ -42,6 +42,4 @@ export const query = graphql`
       totalCount
     }
   }
-  
-  
 `
