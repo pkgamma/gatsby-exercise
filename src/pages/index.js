@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 import Header from "../components/header"
 import Layout from "../components/layout"
 
-export default function Home({data}) {
+export default function Home({ data }) {
   // console.log(data)
   return (
     <Layout>
@@ -15,7 +15,9 @@ export default function Home({data}) {
           <tbody>
             {data.allMarkdownRemark.edges.map(({ node }) => (
               <tr key={node.id}>
-                <td>{node.frontmatter.title}</td>
+                <Link to={node.fields.slug}>
+                  <td>{node.frontmatter.title}</td>
+                </Link>
                 <td>{node.frontmatter.date}</td>
               </tr>
             ))}
@@ -36,6 +38,9 @@ export const query = graphql`
           frontmatter {
             date
             title
+          }
+          fields {
+            slug
           }
         }
       }
